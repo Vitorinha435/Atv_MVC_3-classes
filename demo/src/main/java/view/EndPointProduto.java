@@ -3,29 +3,32 @@ package view;
 import controller.ControladorCliente;
 import controller.ControladorProduto;
 import controller.ControladorVenda;
+import model.Cliente;
 import model.Produto;
+import model.Venda;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-public class EndPoint {
+public class EndPointProduto {
 
     public ControladorProduto c1 = new ControladorProduto();
-    public ControladorCliente c2 = new ControladorCliente();
-    public ControladorVenda c3 = new ControladorVenda();
 
-    @GetMapping
-    public List<Produto> getInformations(){
+
+    @GetMapping("/produto")
+    public List<Produto> getInformationsProduto(){
         return c1.listarProduto();
     }
 
     @PostMapping
-    public String postInformations(@RequestBody Produto produto){
-        c1.postarProdutos(produto);
+    public String postInformationsProduto(@RequestBody Produto produto){
+        c1.postarProduto(produto);
         return "Sucesso";
     }
 
     @PutMapping
-    public String putInformations(@RequestBody Produto produto){
+    public String putInformationsProduto(@RequestBody Produto produto){
         if(c1.atualizarProduto(produto)){
             return "Produto atualizado com sucesso!";
         } else {
@@ -34,7 +37,7 @@ public class EndPoint {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteInformations(@RequestParam Integer id){
+    public String deleteInformationsProduto(@RequestParam Integer id){
         if(c1.deletarProduto(id)){
             return "Deletado com sucesso!";
         } else {
@@ -43,4 +46,7 @@ public class EndPoint {
     }
 
 
+
+
 }
+
